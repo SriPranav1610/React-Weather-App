@@ -4,6 +4,7 @@ import { fetchweather } from "./Api/FetchWeather";
 
 const App = () => {
   const [query, setQuery] = useState("");
+  const [temperatureEntered, setTemperatureEntered] = useState(false);
   const [weather, setWeather] = useState({});
   // const [errorMessage, setErrorMessage] = useState();
 
@@ -16,6 +17,7 @@ const App = () => {
   // const handleClick = () => {
   //   setErrorMessage("Please enter the correct city name!");
   // };
+  
 
   const search = async (event) => {
    if(event.key=='Enter'){
@@ -23,29 +25,38 @@ const App = () => {
 
       setWeather(data);
       setQuery("");
+      await setTemperatureEntered("true");
    }
      //else {
        //const err = handleClick();
      //}
   };
+    
+  
+  
 
   return (
     <div className="App">
-      <input
+      {!temperatureEntered ? <input
         type="text"
         className="search"
         placeholder="Enter the Location"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        onKeyPress={search}
+        onKeyDown={(e) => search(e)}
+        
       />
-      
-      {/* {errorMessage && <div className="error"> {errorMessage} </div>} */}
-      {weather.main && (
+
+      : weather.main && (
         <div className="city">
+          <div className = "button_container">
+            <button className  = "backbutton" onClick={() => {
+              setTemperatureEntered(false);
+            }}>&larr;</button>
+          </div>
           <div className="date"> {new Date().toDateString("en-US")}</div>
           {/* <div className="date"> {new Date().toDateString("en-us")}</div> */}
-
+          
           <h2 className="city-name">
             <span>{weather.name}</span>
             <sup>{weather.sys.country}</sup>
@@ -69,3 +80,5 @@ const App = () => {
 };
 
 export default App;
+
+
