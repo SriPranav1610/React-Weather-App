@@ -45,6 +45,21 @@ body,
 .search :placeholder-shown {
   display: none;
 }
+.button_container{
+  float: left;
+  position: absolute;
+  width: 300px;
+  margin-top: -370px;
+}
+
+.backbutton{
+ padding-left: 2px;
+ display: flex;
+  /* justify-content: space-between; */
+  /* align-items: flex-start; */
+
+  text-align: left;
+}
 
 .button1{
   width: 20%;
